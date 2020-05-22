@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Actors/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/Test world.gd" type="Script" id=3]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 19.3487, 18.1515 )
@@ -20,3 +23,25 @@ drag_margin_left = 0.5
 drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 143.664, -25.3925 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -129.715, -66.5406 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -135.546, 83.9187 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 51.0699, 68.7561 )
+
+[node name="Enemy5" parent="." instance=ExtResource( 2 )]
+position = Vector2( -0.249542, -43.2136 )
+
+[node name="Enemy6" parent="." instance=ExtResource( 2 )]
+position = Vector2( -51.569, 2.27408 )
+
+[node name="Enemy7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 67.3988, -9.38943 )
+[connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
