@@ -1,20 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Actors/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Others/Spike.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Test world.gd" type="Script" id=3]
+[ext_resource path="res://Others/End pad.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Others/start pad.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Start pad" parent="." instance=ExtResource( 5 )]
+position = Vector2( -117.636, 18.953 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 19.3487, 18.1515 )
+position = Vector2( -116.172, 17.1345 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 19.3487, 18.1515 )
+position = Vector2( -116.172, 17.1345 )
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -24,24 +29,37 @@ drag_margin_top = 0.5
 drag_margin_right = 0.5
 drag_margin_bottom = 0.5
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 143.664, -25.3925 )
+[node name="End pad" parent="." instance=ExtResource( 4 )]
+position = Vector2( 137.818, 38.9785 )
+collision_mask = 0
 
-[node name="Enemy2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -129.715, -66.5406 )
+[node name="Spike" parent="." instance=ExtResource( 2 )]
+position = Vector2( -35.8942, 38.1138 )
 
-[node name="Enemy3" parent="." instance=ExtResource( 2 )]
-position = Vector2( -135.546, 83.9187 )
+[node name="Spike2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 19.1698, 45.4115 )
 
-[node name="Enemy4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 51.0699, 68.7561 )
+[node name="Spike3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 78.2144, 50.0554 )
 
-[node name="Enemy5" parent="." instance=ExtResource( 2 )]
-position = Vector2( -0.249542, -43.2136 )
+[node name="Spike4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 72.2436, -14.2965 )
+rotation = 3.14159
 
-[node name="Enemy6" parent="." instance=ExtResource( 2 )]
-position = Vector2( -51.569, 2.27408 )
+[node name="Spike5" parent="." instance=ExtResource( 2 )]
+position = Vector2( -27.9331, -27.5649 )
+rotation = 3.14159
 
-[node name="Enemy7" parent="." instance=ExtResource( 2 )]
-position = Vector2( 67.3988, -9.38943 )
+[node name="Spike6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 21.1601, -18.9404 )
+rotation = 3.14159
+
+[node name="Spike7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 129.961, -11.6428 )
+rotation = 3.14159
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( 200.932, -106.565, 237.585, 14.7968, 223.739, 96.2475, 122.906, 150.56, -74.6087, 120.732, -197.675, 22.2788, -178.336, -99.0293, -257.45, -111.336, -311.951, 145.345, -23.6241, 238.524, 354.365, 242.04, 377.22, 59.1987, 308.655, -111.336 )
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]

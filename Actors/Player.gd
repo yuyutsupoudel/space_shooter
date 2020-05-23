@@ -1,8 +1,10 @@
 extends KinematicBody2D
-var MAX_SPEED = 1000
-var speed = 70
-var FRICTION = 50
+var MAX_FALL = 150
+var speed = 100
+var FRICTION = 30
 var ACCLERATION = 100
+var GRAVITY = 100
+var MAX_SPEED = 100
 var velocity = Vector2.ZERO
 var rotation_speed = 5
 signal shoot
@@ -12,9 +14,17 @@ onready var Bullet = preload("res://Others/PlayerBullet.tscn")
 
 func _physics_process(delta):
 	get_player_input(delta)
-	move_and_slide(velocity)
+	if is_on_ceiling():
+		velocity.y=0
+	if !is_on_floor():
+		velocity.y += GRAVITY*delta
+		if velocity.y>=MAX_FALL:
+			velocity.y=MAX_FALL
+	move_and_slide(velocity,Vector2.UP)
+
 func shoot():
 	var dir = Vector2(0,-1).rotated(global_rotation)
+	print(dir)
 	emit_signal("shoot",Bullet,$Position2D.global_position,dir)
 	
 func get_player_input(delta):
@@ -30,7 +40,19 @@ func get_player_input(delta):
 	if Input.is_action_just_released("ui_up"):
 		Booster.play("stop")
 	if Input.is_action_pressed("ui_up"):
-		velocity = Vector2(0,-speed).rotated(rotation)
+		velocity = Vector2(0,-MAX_SPEED).rotated(rotation)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO,FRICTION*delta)
 	rotation+=rotation_direction*rotation_speed*delta
+
+func get_sign(value):
+	var dir = Vector2.ZERO
+	if value.x>0:
+		dir.x=1
+	else:
+		dir.x=-1
+	if value.y>0:
+		dir.y=1
+	else:
+		dir.y=-1
+	return dir
