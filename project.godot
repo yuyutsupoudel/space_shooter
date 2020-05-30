@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Space Shooter"
-run/main_scene="res://World/Test world.tscn"
+run/main_scene="res://UI/Start_menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameStats="*res://Others/Game_stats.gd"
 
 [display]
 
@@ -37,9 +41,9 @@ texture={
 "compress/lossy_quality": 0.7,
 "compress/mode": 0,
 "compress/normal_map": 0,
-"detect_3d": true,
+"detect_3d": false,
 "flags/anisotropic": false,
-"flags/filter": true,
+"flags/filter": false,
 "flags/mipmaps": false,
 "flags/repeat": 0,
 "flags/srgb": 2,
